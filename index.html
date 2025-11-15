@@ -108,7 +108,11 @@
                 <span class="tag">Node.js</span>
                 <span class="tag">MongoDB</span>
               </div>
-              <a href="#" class="btn">View Project</a>
+              <!-- added data attributes for modal -->
+              <a href="#" class="btn view-project"
+                 data-title="E-commerce Platform"
+                 data-img="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80"
+                 data-desc="A fully responsive e-commerce website with product listings, shopping cart, and secure checkout.">View Project</a>
             </div>
           </div>
 
@@ -131,7 +135,10 @@
                 <span class="tag">Firebase</span>
                 <span class="tag">CSS3</span>
               </div>
-              <a href="#" class="btn">View Project</a>
+              <a href="#" class="btn view-project"
+                 data-title="Task Management App"
+                 data-img="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
+                 data-desc="A productivity application for managing tasks, projects, and team collaboration with real-time updates.">View Project</a>
             </div>
           </div>
 
@@ -154,7 +161,10 @@
                 <span class="tag">API Integration</span>
                 <span class="tag">Bootstrap</span>
               </div>
-              <a href="#" class="btn">View Project</a>
+              <a href="#" class="btn view-project"
+                 data-title="Weather Dashboard"
+                 data-img="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
+                 data-desc="A responsive weather application that displays current conditions and forecasts for multiple locations.">View Project</a>
             </div>
           </div>
 
@@ -177,12 +187,31 @@
                 <span class="tag">AI</span>
                 <span class="tag">Finance</span>
               </div>
-              <a href="#" class="btn">View Project</a>
+              <a href="#" class="btn view-project"
+                 data-title="Personal Financial Tracker"
+                 data-img="https://www.executiveknowledge.org/assets/uploads/primary_images/93/7044de791603ee991ad6d113b4494914.JPG"
+                 data-desc="An AI-powered personal finance application that helps track spending, set budgets, and provides smart insights and forecasts using machine learning.">View Project</a>
             </div>
           </div>
+
         </div>
       </div>
     </section>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Close project dialog">&times;</button>
+        <div class="modal-inner">
+          <img id="modal-img" src="" alt="" />
+          <div class="modal-info">
+            <h3 id="modal-title"></h3>
+            <p id="modal-desc"></p>
+            <a id="modal-link" class="btn" href="#" target="_blank" rel="noopener">Open Project</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Experience Section -->
     <section id="experience" class="section">
@@ -374,13 +403,9 @@
       </div>
     </footer>
 
-    <script>
-      // Simple JavaScript for mobile menu toggle
-      document
-        .querySelector('.menu-toggle')
-        .addEventListener('click', function () {
-          document.querySelector('.nav-links').classList.toggle('active')
-        })
-    </script>
+    <!-- Back to top -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+
+    <script src="script.js"></script>
   </body>
 </html>
