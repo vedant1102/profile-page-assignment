@@ -13,6 +13,16 @@ document.addEventListener('DOMContentLoaded', function () {
   const modalLink = document.getElementById('modal-link')
   const modalClose = modal ? modal.querySelector('.modal-close') : null
 
+  // Experience Slider Elements
+  const experienceSlider = document.querySelector('.experience-slider')
+  const experienceSlides = document.querySelectorAll('.experience-slide')
+  const sliderPrev = document.querySelector('.slider-prev')
+  const sliderNext = document.querySelector('.slider-next')
+  const sliderDots = document.querySelectorAll('.dot')
+  
+  // Current slide index
+  let currentSlide = 0
+
   // Menu toggle (accessible)
   if (menuToggle && navLinks) {
     menuToggle.setAttribute('role', 'button')
@@ -141,6 +151,65 @@ document.addEventListener('DOMContentLoaded', function () {
       setTimeout(() => success.remove(), 4000)
     })
   }
+
+  // Experience Slider Functionality
+  function showSlide(index) {
+    // Hide all slides
+    experienceSlides.forEach(slide => {
+      slide.classList.remove('active')
+    });
+    
+    // Remove active class from all dots
+    sliderDots.forEach(dot => {
+      dot.classList.remove('active')
+    });
+    
+    // Show the current slide and update dot
+    experienceSlides[index].classList.add('active')
+    sliderDots[index].classList.add('active')
+    
+    // Update current slide index
+    currentSlide = index
+  }
+
+  // Next slide
+  if (sliderNext) {
+    sliderNext.addEventListener('click', function() {
+      let nextSlide = currentSlide + 1
+      if (nextSlide >= experienceSlides.length) {
+        nextSlide = 0
+      }
+      showSlide(nextSlide)
+    })
+  }
+
+  // Previous slide
+  if (sliderPrev) {
+    sliderPrev.addEventListener('click', function() {
+      let prevSlide = currentSlide - 1
+      if (prevSlide < 0) {
+        prevSlide = experienceSlides.length - 1
+      }
+      showSlide(prevSlide)
+    })
+  }
+
+  // Dot navigation
+  sliderDots.forEach(dot => {
+    dot.addEventListener('click', function() {
+      const slideIndex = parseInt(this.getAttribute('data-index'))
+      showSlide(slideIndex)
+    })
+  })
+
+  // Auto slide every 5 seconds
+  setInterval(() => {
+    let nextSlide = currentSlide + 1
+    if (nextSlide >= experienceSlides.length) {
+      nextSlide = 0
+    }
+    showSlide(nextSlide)
+  }, 5000)
 
   // --- Added: reveal-on-scroll + project-card tilt (unique touches) ---
 

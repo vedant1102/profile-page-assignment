@@ -1,10 +1,10 @@
-/* CSS Variables */
+/* CSS Variables with enhanced color scheme */
 :root {
-  --primary-color: #2c3e50;
-  --secondary-color: #3498db;
-  --accent-color: #e74c3c;
-  --light-color: #ecf0f1;
-  --dark-color: #2c3e50;
+  --primary-color: #1a1a2e;
+  --secondary-color: #0f4c75;
+  --accent-color: #ff6b6b;
+  --light-color: #e3f2fd;
+  --dark-color: #16213e;
   --text-color: #333;
   --text-light: #777;
   --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -13,6 +13,9 @@
   --anim-medium: 0.45s;
   --anim-slow: 0.9s;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --gradient-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  --gradient-secondary: linear-gradient(135deg, #0f4c75 0%, #3282b8 100%);
+  --gradient-accent: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
 }
 
 /* Reset and Base Styles */
@@ -63,6 +66,7 @@ img {
   text-align: center;
   margin-bottom: 50px;
   position: relative;
+  overflow: hidden;
 }
 
 .section-title::after {
@@ -70,14 +74,42 @@ img {
   display: block;
   width: 70px;
   height: 4px;
-  background: var(--secondary-color);
+  background: var(--accent-color);
   margin: 15px auto;
+  border-radius: 2px;
+}
+
+/* Typewriter effect */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid var(--accent-color);
+  white-space: nowrap;
+  margin: 0 auto;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+.typewriter-delay {
+  overflow: hidden;
+  border-right: 2px solid var(--accent-color);
+  white-space: nowrap;
+  margin: 0 auto;
+  animation: typing 3.5s steps(40, end) 1s both, blink-caret 0.75s step-end infinite 1s;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--accent-color) }
 }
 
 .btn {
   display: inline-block;
   padding: 12px 30px;
-  background: var(--secondary-color);
+  background: var(--gradient-secondary);
   color: white;
   border: none;
   border-radius: 5px;
@@ -86,13 +118,14 @@ img {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(15, 76, 117, 0.3);
 }
 
 .btn:hover {
-  background: var(--primary-color);
+  background: var(--gradient-accent);
   color: white;
   transform: translateY(-3px);
-  box-shadow: var(--shadow);
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
 }
 
 /* Reveal helper */
@@ -111,7 +144,7 @@ img {
 
 /* Header Styles */
 header {
-  background: var(--primary-color);
+  background: var(--gradient-primary);
   color: white;
   position: fixed;
   width: 100%;
@@ -133,7 +166,7 @@ header {
 }
 
 .logo span {
-  color: var(--secondary-color);
+  color: var(--accent-color);
 }
 
 .nav-links {
@@ -158,7 +191,7 @@ header {
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--secondary-color);
+  background: var(--accent-color);
   transition: var(--transition);
 }
 
@@ -266,6 +299,8 @@ header {
   border-radius: 30px;
   font-size: 0.9rem;
   font-weight: 500;
+  background: var(--gradient-secondary);
+  color: white;
 }
 
 /* Projects Section */
@@ -339,84 +374,117 @@ header {
   border-radius: 5px;
   font-size: 0.8rem;
   color: var(--text-light);
+  background: var(--gradient-secondary);
+  color: white;
 }
 
 /* Experience Section */
-.timeline {
+.experience-slider-container {
   position: relative;
   max-width: 800px;
   margin: 0 auto;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.timeline::after {
-  content: '';
-  position: absolute;
-  width: 6px;
-  background: var(--secondary-color);
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  margin-left: -3px;
+.experience-slider {
+  display: flex;
+  transition: transform 0.5s ease;
 }
 
-.timeline-item {
-  padding: 10px 40px;
-  position: relative;
-  width: 50%;
-  box-sizing: border-box;
+.experience-slide {
+  min-width: 100%;
+  padding: 40px;
+  background: white;
+  text-align: center;
+  display: none;
 }
 
-.timeline-item:nth-child(odd) {
-  left: 0;
+.experience-slide.active {
+  display: block;
+  animation: fadeIn 0.8s ease;
 }
 
-.timeline-item:nth-child(even) {
-  left: 50%;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .timeline-content {
-  padding: 20px;
-  background: white;
+  padding: 30px;
+  background: var(--gradient-secondary);
+  color: white;
   border-radius: 10px;
-  box-shadow: var(--shadow);
+  box-shadow: 0 8px 25px rgba(15, 76, 117, 0.3);
   position: relative;
-  opacity: 0;
-  transform: translateY(14px) scale(0.995);
-  transition: opacity var(--anim-medium) var(--ease-out),
-    transform var(--anim-medium) var(--ease-out);
-}
-
-.timeline-content.in-view {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-.timeline-content::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  right: -10px;
-  background: white;
-  top: 20px;
-  border-radius: 50%;
-  z-index: 1;
-  box-shadow: 0 0 0 4px var(--secondary-color);
-}
-
-.timeline-item:nth-child(even) .timeline-content::after {
-  left: -10px;
 }
 
 .timeline-date {
   font-weight: 700;
-  color: var(--secondary-color);
+  color: var(--accent-color);
   margin-bottom: 10px;
+  font-size: 1.1rem;
 }
 
 .timeline-content h3 {
   margin-bottom: 10px;
-  color: var(--primary-color);
+  color: white;
+  font-size: 1.5rem;
+}
+
+.company {
+  font-style: italic;
+  margin-bottom: 15px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Slider Navigation */
+.slider-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: var(--gradient-primary);
+}
+
+.slider-prev, .slider-next {
+  background: var(--gradient-accent);
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+}
+
+.slider-prev:hover, .slider-next:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(255, 107, 107, 0.5);
+}
+
+.slider-dots {
+  display: flex;
+  gap: 10px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.dot.active {
+  background: var(--accent-color);
+  transform: scale(1.2);
 }
 
 /* Contact Section */
@@ -439,7 +507,7 @@ header {
 }
 
 .contact-icon {
-  background: var(--secondary-color);
+  background: var(--gradient-secondary);
   color: white;
   width: 40px;
   height: 40px;
@@ -550,7 +618,7 @@ textarea.form-control {
   position: fixed;
   right: 20px;
   bottom: 24px;
-  background: var(--secondary-color);
+  background: var(--gradient-secondary);
   color: white;
   border: none;
   width: 44px;
@@ -583,7 +651,7 @@ textarea.form-control {
 
 /* Footer */
 footer {
-  background: var(--dark-color);
+  background: var(--gradient-primary);
   color: white;
   padding: 50px 0 20px;
 }
@@ -609,7 +677,7 @@ footer {
   bottom: 0;
   width: 40px;
   height: 2px;
-  background: var(--secondary-color);
+  background: var(--accent-color);
 }
 
 .footer-links {
@@ -626,7 +694,7 @@ footer {
 }
 
 .footer-links a:hover {
-  color: var(--secondary-color);
+  color: var(--accent-color);
   padding-left: 5px;
 }
 
@@ -649,7 +717,7 @@ footer {
 }
 
 .social-links a:hover {
-  background: var(--secondary-color);
+  background: var(--accent-color);
   transform: translateY(-5px);
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
 }
@@ -712,22 +780,12 @@ footer {
     align-items: center;
   }
 
-  .timeline::after {
-    left: 31px;
+  .experience-slide {
+    padding: 20px;
   }
-
-  .timeline-item {
-    width: 100%;
-    padding-left: 70px;
-    padding-right: 25px;
-  }
-
-  .timeline-item:nth-child(even) {
-    left: 0;
-  }
-
-  .timeline-content::after {
-    left: -10px;
+  
+  .slider-nav {
+    padding: 15px;
   }
 }
 
@@ -757,6 +815,12 @@ footer {
   .projects-grid {
     grid-template-columns: 1fr;
   }
+  
+  .typewriter, .typewriter-delay {
+    white-space: normal;
+    border-right: none;
+    animation: none;
+  }
 }
 
 /* Focus-visible outlines for keyboard users */
@@ -774,5 +838,11 @@ footer {
   * {
     transition: none !important;
     animation: none !important;
+  }
+  
+  .typewriter, .typewriter-delay {
+    white-space: normal;
+    border-right: none;
+    animation: none;
   }
 }
